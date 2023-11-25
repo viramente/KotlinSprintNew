@@ -5,11 +5,12 @@ fun main() {
     val hourOfDeparture = 9
     val minutesOfDeparture = 39
     val travelTimeInMinutes = 457
+    val minutesInAnHour = 60
 
-    val absoluteTimeOfDepartureInMinutes = hourOfDeparture * 60 + minutesOfDeparture
+    val absoluteTimeOfDepartureInMinutes = hourOfDeparture * minutesInAnHour + minutesOfDeparture
     val arrivalTimeInMinutes = absoluteTimeOfDepartureInMinutes + travelTimeInMinutes
-    val hoursOfArrival = arrivalTimeInMinutes / 60
-    val minutesOfArrival = arrivalTimeInMinutes - hoursOfArrival*60
+    val hoursOfArrival = arrivalTimeInMinutes / minutesInAnHour
+    val minutesOfArrival = arrivalTimeInMinutes - hoursOfArrival * minutesInAnHour
 
     print(hoursOfArrival)
     print(':')
