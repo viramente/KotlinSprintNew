@@ -14,7 +14,7 @@ fun main() {
     $numberForMultiplying x 9 = ${"%${2}s".format(numberForMultiplying * 7)}
     $numberForMultiplying x 9 = ${"%${2}s".format(numberForMultiplying * 8)}
     $numberForMultiplying x 9 = ${"%${2}s".format(numberForMultiplying * 9)}
-    """
+    """.trimIndent()
     println(tableOfMultiplying)
 
 }
