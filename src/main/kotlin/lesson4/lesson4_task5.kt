@@ -9,10 +9,13 @@ fun main() {
 
     println("Корабль может отправиться в плавание: ${(shipIsNotDamaged &&
             (numberOfCrew in MIN_NUMBER_OF_CREW..MAX_NUMBER_OF_CREW) &&
-            (boxesOfProvisions > 50)) ||
-            ((numberOfCrew == MAX_NUMBER_OF_CREW) && (boxesOfProvisions >= 50) && weatherIsFavorable)}")
+            (boxesOfProvisions > MIN_BOXES_OF_PROVISIONS)) ||
+            ((numberOfCrew == MAX_NUMBER_OF_CREW) &&
+                    (boxesOfProvisions >= MIN_BOXES_OF_PROVISIONS) && 
+                    weatherIsFavorable)}")
 
 }
 
 const val MIN_NUMBER_OF_CREW = 55
 const val MAX_NUMBER_OF_CREW = 70
+const val MIN_BOXES_OF_PROVISIONS = 50
