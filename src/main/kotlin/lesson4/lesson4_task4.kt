@@ -3,13 +3,13 @@ package lesson4
 fun main() {
 
     val today = 5
-    val isOddDay = today / 2 == 1
+    val isEvenDay = today % 2 == 0
 
     println("""
-Упражнения для рук:       ${!isOddDay}
-Упражнения для ног:       $isOddDay
-Упражнения для спины:  $isOddDay
-Упражнения для пресса: ${!isOddDay}
-""")
+Упражнения для рук:    $isEvenDay
+Упражнения для ног:    ${!isEvenDay}
+Упражнения для спины:  ${!isEvenDay}
+Упражнения для пресса: $isEvenDay
+""".trimIndent())
 
 }
