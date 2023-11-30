@@ -2,12 +2,19 @@ package lesson5
 
 fun main() {
 
-    println("Докажите, что вы не бот. Сколько будет 5 + 6?")
-    val userAnswer = readln()
+    val firstNumber = (1..10).random()
+    val secondNumber = (1..10).random()
+    val sum = firstNumber + secondNumber
+
+    println("Докажите, что вы не бот. Сколько будет $firstNumber + $secondNumber?")
+    val userAnswer = readln().toInt()
+
     val allowingMessage = "Добро пожаловать!"
     val prohibitingMassage = "Доступ запрещен."
-    println (if (userAnswer == RIGHT_ANSWER) allowingMessage else prohibitingMassage)
+
+    println (
+        if (userAnswer == sum) allowingMessage
+        else prohibitingMassage
+    )
 
 }
-
-const val RIGHT_ANSWER = "11"
