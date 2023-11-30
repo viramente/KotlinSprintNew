@@ -2,17 +2,24 @@ package lesson4
 
 fun main() {
 
-    val shipIsNotDamaged: Boolean = readln().toBoolean()
-    val numberOfCrew: Int = readln().toInt()
-    val boxesOfProvisions: Int = readln().toInt()
-    val weatherIsFavorable: Boolean = readln().toBoolean()
+    println("Имеет ли корабль повреждения? true/false")
+    val isShipDamaged: Boolean = readln().toBoolean()
 
-    println("Корабль может отправиться в плавание: ${(shipIsNotDamaged &&
+    println("Укажите число экипажа:")
+    val numberOfCrew: Int = readln().toInt()
+
+    println("Сколько ящиков провизии находится на борту?")
+    val boxesOfProvisions: Int = readln().toInt()
+
+    println("Благоприятна ли погода? true/false")
+    val isWeatherFavorable: Boolean = readln().toBoolean()
+
+    println("Корабль может отправиться в плавание: ${(!isShipDamaged &&
             (numberOfCrew in MIN_NUMBER_OF_CREW..MAX_NUMBER_OF_CREW) &&
             (boxesOfProvisions > MIN_BOXES_OF_PROVISIONS)) ||
             ((numberOfCrew == MAX_NUMBER_OF_CREW) &&
                     (boxesOfProvisions >= MIN_BOXES_OF_PROVISIONS) && 
-                    weatherIsFavorable)}")
+                    isWeatherFavorable)}")
 
 }
 
