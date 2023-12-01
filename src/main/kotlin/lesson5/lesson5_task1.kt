@@ -9,12 +9,12 @@ fun main() {
     println("Докажите, что вы не бот. Сколько будет $firstNumber + $secondNumber?")
     val userAnswer = readln().toInt()
 
-    val allowingMessage = "Добро пожаловать!"
-    val prohibitingMassage = "Доступ запрещен."
-
     println (
-        if (userAnswer == sum) allowingMessage
-        else prohibitingMassage
+        if (userAnswer == sum) ALLOWING_MESSAGE
+        else PROHIBITING_MESSAGE
     )
 
 }
+
+const val ALLOWING_MESSAGE = "Добро пожаловать!"
+const val PROHIBITING_MESSAGE = "Доступ запрещен."
