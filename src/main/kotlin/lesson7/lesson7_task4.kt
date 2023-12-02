@@ -2,7 +2,7 @@ package lesson7
 
 fun main() {
 
-    println(REQUEST_MESSAGE)
+    println("Сколько секунд надо засечь?")
     val seconds = readln().toInt()
 
     for (each in seconds downTo 1) {
@@ -10,8 +10,5 @@ fun main() {
         Thread.sleep(1000)
     }
 
-    println(FINAL_MESSAGE)
+    println("Время вышло.")
 }
-
-const val REQUEST_MESSAGE = "Сколько секунд надо засечь?"
-const val FINAL_MESSAGE = "Время вышло."
