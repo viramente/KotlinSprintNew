@@ -8,23 +8,13 @@ fun main() {
     println(PASSWORD_CREATE)
     val usersPassword = readln()
 
-    println(LOGIN_REQUEST)
-    var loginForCheckIn = readln()
-
-    println(PASSWORD_REQUEST)
-    var passwordForCheckIn = readln()
-
-    while ((usersLogin != loginForCheckIn) || (usersPassword != passwordForCheckIn)) {
-
-        println(AUTHORIZATION_UNSUCCESSFUL_MESSAGE)
-
+    do {
         println(LOGIN_REQUEST)
-        loginForCheckIn = readln()
+        val loginForCheckIn = readln()
 
         println(PASSWORD_REQUEST)
-        passwordForCheckIn = readln()
-
-    }
+        val passwordForCheckIn = readln()
+    } while ((usersLogin != loginForCheckIn) || (usersPassword != passwordForCheckIn))
 
     println(AUTHORIZATION_SUCCESSFUL_MESSAGE)
 
@@ -35,7 +25,5 @@ const val PASSWORD_CREATE = "Создайте пароль:"
 
 const val LOGIN_REQUEST = "Введите логин:"
 const val PASSWORD_REQUEST = "Введите пароль:"
-
-const val AUTHORIZATION_UNSUCCESSFUL_MESSAGE = "Ошибка! Попробуйте еще раз."
 
 const val AUTHORIZATION_SUCCESSFUL_MESSAGE = "Авторизация прошла успешно."
