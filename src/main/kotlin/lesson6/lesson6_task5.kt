@@ -4,26 +4,24 @@ fun main() {
 
     var counter = ATTEMPTS_AMOUNT
 
-    while (counter != 0) {
+    while (counter-- > 0) {
+
         println(REQUEST_MESSAGE)
 
         val firstNumber = (0..9).random()
         val secondNumber = (0..9).random()
 
         println("Сколько будет $firstNumber + $secondNumber?")
-
         val usersAnswer = readln().toInt()
 
         if (usersAnswer == (firstNumber + secondNumber)) {
             println(SUCCESSFUL_MESSAGE)
-            break
+            return
         }
-
-        counter--
 
         if (counter == 0) {
             println(UNSUCCESSFUL_MESSAGE)
-            break
+            return
         }
 
         println("Неверно. Осталось попыток: $counter.")
