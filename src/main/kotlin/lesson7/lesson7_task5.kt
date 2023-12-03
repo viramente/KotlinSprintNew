@@ -2,30 +2,23 @@ package lesson7
 
 fun main() {
 
-    println(MAX_PASSWORD_LENGTH_REQUEST)
+    println("Укажите максимальную длину пароля (минимум $MIN_PASSWORD_LENGTH символов):")
     val maxPasswordsLength = readln().toInt()
 
     val passwordsLength = (MIN_PASSWORD_LENGTH..maxPasswordsLength).random()
     var password = ""
 
+    val symbolsRange = ('A'..'Z').joinToString("") +
+            ('a'..'z').joinToString("") +
+            ('0'..'9').joinToString("")
+
     for (order in 1..passwordsLength) {
-
-        val type = (1..3).random()
-
-        val symbolForAdding = when (type) {
-            1 -> ('a'..'z').random()
-            2 -> ('A'..'Z').random()
-            3 -> (0..9).random().digitToChar()
-            else -> ','
-        }
-
+        val symbolForAdding = symbolsRange.random()
         password += symbolForAdding
-
     }
 
     println("Сгенерированный пароль: $password.")
 
 }
 
-const val MAX_PASSWORD_LENGTH_REQUEST = "Укажите максимальную длину пароля (минимум 6 символов):"
 const val MIN_PASSWORD_LENGTH = 6
