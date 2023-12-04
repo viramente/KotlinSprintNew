@@ -8,9 +8,7 @@ fun main() {
     val passwordsLength = (MIN_PASSWORD_LENGTH..maxPasswordsLength).random()
     var password = ""
 
-    val symbolsRange = ('A'..'Z').joinToString("") +
-            ('a'..'z').joinToString("") +
-            ('0'..'9').joinToString("")
+    val symbolsRange = ('A'..'Z') + ('a'..'z') + ('0'..'9')
 
     for (order in 1..passwordsLength) {
         val symbolForAdding = symbolsRange.random()
