@@ -5,9 +5,12 @@ fun main() {
     var password: String = ""
     val pairsLetterPlusNumberAmount = PASSWORD_LENGTH / 2
 
+    val letters = ('a'..'z')
+    val numbers = (0..9)
+
     for (i in 0..<pairsLetterPlusNumberAmount) {
-        val randomLetter = ('a'..'z').random()
-        val randomNumber = (0..9).random()
+        val randomLetter = letters.random()
+        val randomNumber = numbers.random()
         password = password + randomLetter + randomNumber
     }
 
