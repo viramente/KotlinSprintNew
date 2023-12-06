@@ -20,9 +20,7 @@ fun main() {
             println("Ингредиент \"$desiredIngredient\" есть в рецепте!")
             return
         }
-        if (mushroomSaladIngredients.indexOf(ingredient) == mushroomSaladIngredients.size - 1) {
-            println("Ингредиента \"$desiredIngredient\" в рецепте нет.")
-        }
     }
+    println("Ингредиента \"$desiredIngredient\" в рецепте нет.")
 }
 
