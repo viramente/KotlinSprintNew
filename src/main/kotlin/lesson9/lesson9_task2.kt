@@ -10,7 +10,7 @@ fun main() {
     println("Желаете добавить ещё? да/нет")
     val answer = readln()
 
-    if (answer == "да") {
+    if (answer.equals("да", true)) {
         println("Какой ингредиент вы хотите добавить?")
         val newIngredient = readln()
 
