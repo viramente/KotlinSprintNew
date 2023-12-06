@@ -10,7 +10,7 @@ fun main() {
 }
 
 fun getRandomNumber() = (0..9).random().digitToChar()
-fun getRandomSpecialSymbol() = "!\"#\$%&'()*+,-./ ".random()
+fun getRandomSpecialSymbol() = (' '..'/').random()
 
 
 fun createPassword(passwordLength: Int): String {
