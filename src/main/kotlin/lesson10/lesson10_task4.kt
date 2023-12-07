@@ -5,15 +5,12 @@ fun main() {
     println("Начинаем игру.")
 
     var usersWinsAmount = 0
-    var isIntentionToAnotherRound = true
 
-    while (isIntentionToAnotherRound) {
-
+    do {
         if (roundDice()) usersWinsAmount++
-
         println("Хотите бросить кости еще раз? Введите \"Да\" или \"Нет\".")
-        isIntentionToAnotherRound = readln().equals("Да", true)
-    }
+    } while (readln().equals("Да", true))
+
     println("Ваших побед: $usersWinsAmount.")
 }
 
@@ -30,16 +27,29 @@ fun roundDice(): Boolean {
     val humansRollResult = rollDice()
     println("Ваш ход, выпадает $humansRollResult.")
 
-    when {
-        humansRollResult > computersRollResult -> {
-            println("Вы победили.")
-            isUsersVictory = true
-        }
-
-        humansRollResult < computersRollResult -> println("Победил компьютер.")
-
-        else -> println("Ничья.")
-    }
+    if (determineWinner(computersRollResult, humansRollResult) == "human")
+        isUsersVictory = true
 
     return isUsersVictory
+}
+
+
+fun determineWinner(computersRollResult: Int, humansRollResult: Int): String {
+
+    return when {
+        humansRollResult > computersRollResult -> {
+            println("Вы победили.")
+            "human"
+        }
+
+        humansRollResult < computersRollResult -> {
+            println("Победил компьютер.")
+            "computer"
+        }
+
+        else -> {
+            println("Ничья.")
+            "no winner"
+        }
+    }
 }
