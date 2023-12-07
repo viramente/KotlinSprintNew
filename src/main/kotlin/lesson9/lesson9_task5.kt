@@ -2,9 +2,11 @@ package lesson9
 
 fun main() {
 
-    val setOfIngredients = Array(5) {
-        println("Введите ингредиент ${it + 1}:")
-        readln()
+    val setOfIngredients = mutableSetOf<String>()
+
+    for (i in 1..5) {
+        println("Введите ингредиент $i:")
+        setOfIngredients.add(readln())
     }
 
     val orderedListOfIngredients = setOfIngredients.sorted().toMutableList()
