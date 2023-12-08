@@ -1,4 +1,6 @@
-package lesson11
+package lesson11.task1
+
+import lesson11.task2.User
 
 fun main() {
 
