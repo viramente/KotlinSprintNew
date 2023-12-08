@@ -26,14 +26,11 @@ const val REGISTERED_PASSWORD = "tomorrow"
 fun randomSymbol() = (('0'..'9') + ('A'..'Z') + ('a'..'z')).random()
 
 fun authorizeAndGetToken(login: String, password: String): String? {
-    if (login == REGISTERED_LOGIN && password == REGISTERED_PASSWORD) {
-        return (Array(TOKEN_LENGTH) { randomSymbol() })
-            .joinToString("")
-    }
-    return null
+    return if (login == REGISTERED_LOGIN && password == REGISTERED_PASSWORD) {
+        ((Array(TOKEN_LENGTH) { randomSymbol() }).joinToString(""))
+    } else null
 }
 
-fun getBasket(token: String?): List<String>? {
-    return if (token == null) null
-    else listOf("туфли", "куртка", "шапка", "шарф")
+fun getBasket(token: String): List<String> {
+    return listOf("туфли", "куртка", "шапка", "шарф")
 }
