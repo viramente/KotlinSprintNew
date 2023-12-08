@@ -1,5 +1,7 @@
 package lesson11
 
+import lesson11.task1.User
+
 fun main() {
 
     val user1 = User(
