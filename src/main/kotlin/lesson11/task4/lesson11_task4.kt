@@ -25,21 +25,24 @@ class Fish(
     annotation: String = "Описание"
 ): Category(name, annotation)
 
+class Ingredient(
+    val foodStuff: String,
+    val quantity: Int,
+    val unit: String,
+)
+
 class Product(
     val category: Category,
-    val ingredients: Map<String, String>,
+    val ingredients: List<Ingredient>,
     val recipe: String,
     var isFavorite: Boolean = false,
 )
 
 val burgerWithMushroomsAndCheese = Product(
     category = Burgers(),
-    ingredients = mapOf(
-        "Творог" to "250 г",
-        "Куриное яйцо" to "2 шт.",
+    ingredients = listOf(
+        Ingredient("Творог", 250, "г"),
+        Ingredient("Куриное яйцо", 2, "шт."),
         ),
     recipe = "Тут рецепт."
 )
-
-//val cheeseburger = Product(...)
-//val classicBurger = Product(...)
