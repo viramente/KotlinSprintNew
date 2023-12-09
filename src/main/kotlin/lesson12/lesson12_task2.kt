@@ -18,8 +18,13 @@ class DayWeather1(
         println(
             """
             Погода на день: 
+<<<<<<< HEAD
             температура днем: $dayTemperature °C,
             температура ночью: $nightTemperature °C,
+=======
+            температура днем: $dayTemperature °Cб,
+            температура ночью: $nightTemperature °Cб,
+>>>>>>> origin/lesson12_task2
             осадки: $precipitation
             """.trimIndent()
         )
