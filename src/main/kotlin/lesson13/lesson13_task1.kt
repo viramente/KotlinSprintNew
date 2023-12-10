@@ -1,7 +1,7 @@
 package lesson13
 
 
-class TelephoneDirectory (
+class TelephoneSubscriber (
     val name: String,
     val number: Long,
     val company: String?,
