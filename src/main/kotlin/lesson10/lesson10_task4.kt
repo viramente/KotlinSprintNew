@@ -38,18 +38,22 @@ fun determineWinner(computersRollResult: Int, humansRollResult: Int): String {
 
     return when {
         humansRollResult > computersRollResult -> {
-            println("Вы победили.")
+            println(HUMAN_WON)
             "human"
         }
 
         humansRollResult < computersRollResult -> {
-            println("Победил компьютер.")
+            println(COMPUTER_WON)
             "computer"
         }
 
         else -> {
-            println("Ничья.")
-            "no winner"
+            println(NO_WINNERS)
+            "no winners"
         }
     }
 }
+
+const val COMPUTER_WON = "Победил компьютер."
+const val HUMAN_WON = "Вы победили."
+const val NO_WINNERS = "Ничья."
