@@ -11,9 +11,9 @@ class DayWeather2(
     _nightTemperatureInC: Int,
     _precipitation: String) {
 
-    var dayTemperature: Int = _dayTemperatureInC - 273
-    var nightTemperature: Int = _nightTemperatureInC - 273
-    var precipitation: String = _precipitation
+    val dayTemperature: Int = _dayTemperatureInC - 273
+    val nightTemperature: Int = _nightTemperatureInC - 273
+    val precipitation: String = _precipitation
 
     init {
         println(
