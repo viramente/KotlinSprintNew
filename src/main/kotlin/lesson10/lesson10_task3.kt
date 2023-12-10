@@ -9,23 +9,23 @@ fun main() {
 
 }
 
-fun getRandomNumber() = (0..9).random().digitToChar()
+fun getRandomNumber() = (0..9).random()
 fun getRandomSpecialSymbol() = (' '..'/').random()
 
 
 fun createPassword(passwordLength: Int): String {
 
-    val password = mutableListOf<Char>()
+    var password: String = ""
 
     for (i in 0..<passwordLength / 2) {
-        password.add(getRandomNumber())
-        password.add(getRandomSpecialSymbol())
+        password += getRandomNumber()
+        password += getRandomSpecialSymbol()
     }
 
     return (if (passwordLength % 2 == 0) {
-        password.joinToString("")
+        password
     } else {
-        (password + getRandomNumber()).joinToString("")
+        password + getRandomNumber()
     }
             )
 }
