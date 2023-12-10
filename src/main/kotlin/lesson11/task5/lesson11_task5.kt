@@ -3,91 +3,76 @@ package lesson11.task5
 fun main() {
 
     val forumPicturesAndVibes = Forum("Картинки и вайбы")
-    val forumAllForCars = Forum("Всё для машин")
 
-    val sandy = ForumUser.createNewUser("sandy", forumPicturesAndVibes)
-    val robertaDuck = ForumUser.createNewUser("Roberta_Duck", forumPicturesAndVibes)
-    val angryTractor =
-        ForumUser.createNewUser("angry_tractor", forumAllForCars) // для проверки, что его сообщение не пройдет
-
-    val message1 = ForumMessage.createNewMessage(
-        robertaDuck,
+    forumPicturesAndVibes.createNewMessage(
+        forumPicturesAndVibes.listOfForumUsers[0],
         "Ничего не имею против этой милой девушки. Но к фотографам вопросики есть.",
+        forumPicturesAndVibes,
     )
 
-    val message2 = ForumMessage.createNewMessage(
-        sandy,
+    forumPicturesAndVibes.createNewMessage(
+        forumPicturesAndVibes.listOfForumUsers[1],
         "Сейчас вылизанность и правильность вообще не тренд в фотографии.",
+        forumPicturesAndVibes,
     )
 
-    val message3 = ForumMessage.createNewMessage(
-        robertaDuck,
+    forumPicturesAndVibes.createNewMessage(
+        forumPicturesAndVibes.listOfForumUsers[0],
         "А ничего, что у нее одна рука в два раза больше другой?",
+        forumPicturesAndVibes,
     )
 
-    val message4 = ForumMessage.createNewMessage(
-        angryTractor,
-        "А где фото машины, я не понял!",
-    )
-
-    val message5 = ForumMessage.createNewMessage(
-        sandy,
+    forumPicturesAndVibes.createNewMessage(
+        forumPicturesAndVibes.listOfForumUsers[1],
         "Рядовому юзеру вообще пофигу.",
+        forumPicturesAndVibes,
     )
-
 
     forumPicturesAndVibes.printThread()
+
 }
 
 
-fun isUserInRegistry(userId: Int) = userId in UsersRegistry.allUsers.map { it.userId }
-
+fun isInListOfForumUsers(author: ForumUser, forum: Forum) =
+    author.userId in forum.listOfForumUsers.map { it.userId }
 
 class Forum(val name: String) {
+    private val listOfForumUsersNames = listOf("sandy", "Roberta_Duck")
+    val listOfForumUsers = mutableListOf<ForumUser>()
+
+    init {
+        listOfForumUsersNames.forEach { listOfForumUsers.add(ForumUser.createNewUser(it)) }
+    }
+
     val messages = mutableListOf<ForumMessage>()
+
+    fun createNewMessage(author: ForumUser, messageText: String, forum: Forum) {
+        if (isInListOfForumUsers(author, forum)) {
+            messages.add(ForumMessage(author, messageText, forum))
+        }
+    }
+
     fun printThread() {
-        messages.forEach { println("${it.author.userName}: ${ it.messageText }") }
+        messages.forEach { println("${it.author.userName}: ${it.messageText}") }
     }
 }
-
 
 class ForumUser private constructor(
     val userId: Int,
     val userName: String,
-    val userForum: Forum
 ) {
     companion object {
-
         private var userId = 0
-
-        fun createNewUser(userName: String, userForum: Forum): ForumUser {
+        fun createNewUser(userName: String): ForumUser {
             userId++
-            UsersRegistry.addUser(ForumUser(userId, userName, userForum))
-            return ForumUser(userId, userName, userForum)
+            return ForumUser(userId, userName)
         }
     }
 }
 
-class ForumMessage private constructor(
+
+class ForumMessage(
     val author: ForumUser,
-    val messageText: String
-) {
-    companion object {
-
-        fun createNewMessage(author: ForumUser, messageText: String): ForumMessage {
-            if (isUserInRegistry(author.userId))
-                author.userForum.messages.add(ForumMessage(author, messageText))
-            return ForumMessage(author, messageText)
-        }
-    }
-}
-
-
-object UsersRegistry {
-
-    val allUsers = mutableListOf<ForumUser>()
-
-    fun addUser(member: ForumUser) {
-        allUsers.add(member)
-    }
-}
+    val messageText: String,
+    val forum: Forum,
+)
