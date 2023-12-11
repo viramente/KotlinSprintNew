@@ -23,18 +23,18 @@ fun main() {
             "${figures.filter {it.color == "белый"}.sumOf {it.calculateArea()}}")
 }
 
-abstract class Figure() {
-    abstract val color: String
-    abstract fun calculateArea(): Double
-    abstract fun calculatePerimeter(): Double
+open class Figure(open val color: String) {
+    open fun calculateArea(): Double = 0.0
+    open fun calculatePerimeter(): Double = 0.0
 }
 
-open class Circle(private val radiusInCm: Double, override val color: String): Figure() {
+
+class Circle(private val radiusInCm: Double, override val color: String): Figure(color) {
     override fun calculateArea() = radiusInCm * 2 * PI
     override fun calculatePerimeter() = (radiusInCm.pow(2.0) * PI)
 }
 
-class Rectangle(private val height: Double, private val width: Double, override val color: String): Figure() {
+class Rectangle(private val height: Double, private val width: Double, override val color: String): Figure(color) {
     override fun calculateArea() = height * width
     override fun calculatePerimeter() = (height + width) * 2
 }
