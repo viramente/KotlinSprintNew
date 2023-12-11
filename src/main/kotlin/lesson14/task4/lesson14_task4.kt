@@ -18,24 +18,24 @@ fun main() {
 
 
 
-abstract class CelestialBodies {
-    abstract val name: String
-    abstract val hasAtmosphere: Boolean
-    abstract val isSuitableForLanding: Boolean
-}
+open class CelestialBodies (
+    val name: String,
+    val hasAtmosphere: Boolean,
+    val isSuitableForLanding: Boolean,
+)
 
 class Satellite(
-    override val name: String,
-    override val hasAtmosphere: Boolean,
-    override val isSuitableForLanding: Boolean,
-) : CelestialBodies()
+    name: String,
+    hasAtmosphere: Boolean,
+    isSuitableForLanding: Boolean,
+) : CelestialBodies(name, hasAtmosphere, isSuitableForLanding)
 
 
 class Planet(
-    override val name: String,
-    override val hasAtmosphere: Boolean,
-    override val isSuitableForLanding: Boolean,
-) : CelestialBodies() {
+    name: String,
+    hasAtmosphere: Boolean,
+    isSuitableForLanding: Boolean,
+) : CelestialBodies(name, hasAtmosphere, isSuitableForLanding) {
     var listOfSatellites = listOf<Satellite>()
 }
 
