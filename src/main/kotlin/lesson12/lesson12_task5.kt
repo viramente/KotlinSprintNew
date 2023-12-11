@@ -3,7 +3,7 @@ package lesson12
 fun main() {
 
     fun randomTemperatureInGradusC() = (-50..50).random()
-    fun randomPrecipitation() = listOf("без осадков", "мелкий дождь", "снег", "град", "ливень").random()
+    fun randomPrecipitation() = listOf(true, false).random()
 
     val listOfDays = mutableListOf<DayWeather3>()
         for (i in 1..30) listOfDays
@@ -16,11 +16,11 @@ fun main() {
 
     val listOfDayTemperatures = listOfDays.map { it.dayTemperatureInC }
     val listOfNightTemperatures = listOfDays.map { it.nightTemperatureInC }
-    val listOfPrecipitation = listOfDays.map { it.precipitation }
+    val listOfPrecipitation = listOfDays.map { it.isPrecipitation }
 
     val averageDayTemperature = listOfDayTemperatures.average()
     val averageNightTemperature = listOfNightTemperatures.average()
-    val daysWithPrecipitations = listOfPrecipitation.filter { it != "без осадков" }.size
+    val daysWithPrecipitations = listOfPrecipitation.filter { it }.size
 
     println(averageDayTemperature)
     println(averageNightTemperature)
@@ -33,5 +33,5 @@ fun main() {
 class DayWeather3(
     val dayTemperatureInC: Int,
     val nightTemperatureInC: Int,
-    val precipitation: String,
+    val isPrecipitation: Boolean,
 )
