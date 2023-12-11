@@ -41,8 +41,17 @@ class Forum(val name: String) {
     val listOfForumUsers = mutableListOf<ForumUser>()
 
     init {
-        listOfForumUsersNames.forEach { listOfForumUsers.add(ForumUser.createNewUser(it)) }
+        listOfForumUsersNames.forEach { listOfForumUsers.add(createNewUser(it)) }
     }
+
+    companion object {
+        private var userId = 0
+        fun createNewUser(userName: String): ForumUser {
+            userId++
+            return ForumUser(userId, userName)
+        }
+    }
+
 
     val messages = mutableListOf<ForumMessage>()
 
@@ -57,18 +66,10 @@ class Forum(val name: String) {
     }
 }
 
-class ForumUser private constructor(
+class ForumUser(
     val userId: Int,
     val userName: String,
-) {
-    companion object {
-        private var userId = 0
-        fun createNewUser(userName: String): ForumUser {
-            userId++
-            return ForumUser(userId, userName)
-        }
-    }
-}
+)
 
 
 class ForumMessage(
