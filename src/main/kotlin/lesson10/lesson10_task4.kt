@@ -27,7 +27,7 @@ fun roundDice(): Boolean {
     val humansRollResult = rollDice()
     println("Ваш ход, выпадает $humansRollResult.")
 
-    if (determineWinner(computersRollResult, humansRollResult) == "human")
+    if (determineWinner(computersRollResult, humansRollResult) == HUMAN_WON)
         isUsersVictory = true
 
     return isUsersVictory
@@ -38,22 +38,22 @@ fun determineWinner(computersRollResult: Int, humansRollResult: Int): String {
 
     return when {
         humansRollResult > computersRollResult -> {
-            println(HUMAN_WON)
-            "human"
+            println("Вы победили.")
+            HUMAN_WON
         }
 
         humansRollResult < computersRollResult -> {
-            println(COMPUTER_WON)
-            "computer"
+            println("Победил компьютер.")
+            COMPUTER_WON
         }
 
         else -> {
-            println(NO_WINNERS)
-            "no winners"
+            println("Ничья.")
+            NO_WINNERS
         }
     }
 }
 
-const val COMPUTER_WON = "Победил компьютер."
-const val HUMAN_WON = "Вы победили."
-const val NO_WINNERS = "Ничья."
+const val COMPUTER_WON = "computer"
+const val HUMAN_WON = "human"
+const val NO_WINNERS = "no winners"
