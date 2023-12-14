@@ -1,31 +1,32 @@
 package lesson15.task2
 
 fun main() {
-    val message1 = Temperature(12)
-    val message2 = PrecipitationAmount(10)
-    val message3 = Temperature(0)
-    message1.sendToServer()
-    message2.sendToServer()
-    message3.sendToServer()
+
+    val server = WeatherServer()
+
+    server.sendToServer(Temperature(12))
+    server.sendToServer(PrecipitationAmount(10))
+    server.sendToServer(Temperature(0))
 }
 
-abstract class WeatherStationStats(private val dateClassName: String?, private val date: Int,) {
+abstract class WeatherStationStats(val date: Int,)
 
-    fun sendToServer() {
-        when (dateClassName) {
-            "Temperature" -> println("Температура: $date")
-            "PrecipitationAmount" -> println("Осадки: $date")
+class WeatherServer() {
+
+    fun sendToServer(weatherData: WeatherStationStats) {
+        when (weatherData) {
+            is Temperature -> println("Температура: ${weatherData.date}")
+            is PrecipitationAmount -> println("Осадки: ${weatherData.date}")
             else -> println("не вышло")
         }
     }
+
 }
 
 class Temperature(
     dateTemperature: Int,
-    dateClassName: String? = (Temperature::class.simpleName)!!.split(" ")[0]
-) : WeatherStationStats(dateClassName, dateTemperature,)
+) : WeatherStationStats(dateTemperature)
 
 class PrecipitationAmount(
     datePrecipitation: Int,
-    dateClassName: String? = (PrecipitationAmount::class.simpleName)!!.split(" ")[0]
-) : WeatherStationStats(dateClassName, datePrecipitation,)
+) : WeatherStationStats(datePrecipitation)
