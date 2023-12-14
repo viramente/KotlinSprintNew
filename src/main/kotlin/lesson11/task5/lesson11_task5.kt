@@ -4,65 +4,63 @@ fun main() {
 
     val forumPicturesAndVibes = Forum("Картинки и вайбы")
 
+    forumPicturesAndVibes.createNewUser("Andy")
+    forumPicturesAndVibes.createNewUser("Mary")
+
     forumPicturesAndVibes.createNewMessage(
-        forumPicturesAndVibes.listOfForumUsers[0],
+        1,
         "Ничего не имею против этой милой девушки. Но к фотографам вопросики есть.",
         forumPicturesAndVibes,
     )
 
     forumPicturesAndVibes.createNewMessage(
-        forumPicturesAndVibes.listOfForumUsers[1],
+        2,
         "Сейчас вылизанность и правильность вообще не тренд в фотографии.",
         forumPicturesAndVibes,
     )
 
     forumPicturesAndVibes.createNewMessage(
-        forumPicturesAndVibes.listOfForumUsers[0],
+        1,
         "А ничего, что у нее одна рука в два раза больше другой?",
         forumPicturesAndVibes,
     )
 
     forumPicturesAndVibes.createNewMessage(
-        forumPicturesAndVibes.listOfForumUsers[1],
+        2,
         "Рядовому юзеру вообще пофигу.",
         forumPicturesAndVibes,
     )
 
     forumPicturesAndVibes.printThread()
-
 }
 
+fun getUsersName(forumUserInt: Int, forum: Forum): String {
+    return forum.listOfForumUsers.find { it.userId == forumUserInt }!!.userName
+}
 
-fun isInListOfForumUsers(author: ForumUser, forum: Forum) =
-    author.userId in forum.listOfForumUsers.map { it.userId }
+fun isInListOfForumUsers(authorID: Int, forum: Forum) =
+    authorID in forum.listOfForumUsers.map { it.userId }
 
 class Forum(val name: String) {
-    private val listOfForumUsersNames = listOf("sandy", "Roberta_Duck")
+
     val listOfForumUsers = mutableListOf<ForumUser>()
+    private var userID = 0
 
-    init {
-        listOfForumUsersNames.forEach { listOfForumUsers.add(createNewUser(it)) }
+    fun createNewUser(userName: String) {
+        userID++
+        listOfForumUsers.add(ForumUser(userID, userName))
     }
 
-    companion object {
-        private var userId = 0
-        fun createNewUser(userName: String): ForumUser {
-            userId++
-            return ForumUser(userId, userName)
-        }
-    }
+    private val messages = mutableListOf<ForumMessage>()
 
-
-    val messages = mutableListOf<ForumMessage>()
-
-    fun createNewMessage(author: ForumUser, messageText: String, forum: Forum) {
-        if (isInListOfForumUsers(author, forum)) {
-            messages.add(ForumMessage(author, messageText, forum))
+    fun createNewMessage(authorID: Int, messageText: String, forum: Forum) {
+        if (isInListOfForumUsers(authorID, forum)) {
+            messages.add(ForumMessage(authorID, messageText, forum))
         }
     }
 
     fun printThread() {
-        messages.forEach { println("${it.author.userName}: ${it.messageText}") }
+        messages.forEach { println("${getUsersName(it.authorID, this)}: ${it.messageText}") }
     }
 }
 
@@ -71,9 +69,8 @@ class ForumUser(
     val userName: String,
 )
 
-
 class ForumMessage(
-    val author: ForumUser,
+    val authorID: Int,
     val messageText: String,
     val forum: Forum,
 )
