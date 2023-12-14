@@ -2,10 +2,13 @@ package lesson14.task4
 
 fun main() {
 
-    val koenigsberg = Planet("Кёнигсберг", true, false)
-    koenigsberg.listOfSatellites = listOf(
-        Satellite("Розенау", false, false),
-        Satellite("Понарт", false, false),
+    val koenigsberg = Planet(
+        "Кёнигсберг",
+        true,
+        false,
+        listOf(Satellite("Розенау", false, false),
+            Satellite("Понарт", false, false),
+        )
     )
 
     println("Планета: ${koenigsberg.name}, " +
@@ -15,8 +18,6 @@ fun main() {
                 .joinToString (", " )}."
     )
 }
-
-
 
 open class CelestialBodies (
     val name: String,
@@ -30,13 +31,9 @@ class Satellite(
     isSuitableForLanding: Boolean,
 ) : CelestialBodies(name, hasAtmosphere, isSuitableForLanding)
 
-
 class Planet(
     name: String,
     hasAtmosphere: Boolean,
     isSuitableForLanding: Boolean,
-) : CelestialBodies(name, hasAtmosphere, isSuitableForLanding) {
-    var listOfSatellites = listOf<Satellite>()
-}
-
-
+    val listOfSatellites: List<Satellite>,
+) : CelestialBodies(name, hasAtmosphere, isSuitableForLanding)
