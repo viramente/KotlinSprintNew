@@ -20,15 +20,6 @@ fun main() {
 
 }
 
-const val TABULATION = "    "
-
-fun formalizeMassage(message: ChatMessage): String {
-    return when (message) {
-        is ChatChildMessage -> ("$TABULATION${message.author}: ${message.textMessage}")
-        else -> ("${message.author}: ${message.textMessage}")
-    }
-}
-
 class Chat() {
 
     private val chatMessages = mutableListOf<ChatMessage>()
@@ -45,21 +36,25 @@ class Chat() {
         chatMessages.add(ChatChildMessage(messageID, author, text, parentMessageID))
     }
 
-    fun printChat() {
+    private val tabulation = "    "
 
-        val messagesToOutput = mutableListOf<String>()
+    private fun formalizeMassage(message: ChatMessage): String {
+        return when (message) {
+            is ChatChildMessage -> ("$tabulation${message.author}: ${message.textMessage}")
+            else -> ("${message.author}: ${message.textMessage}")
+        }
+    }
+
+    fun printChat() {
 
         val (childMessages, simpleMessages) = chatMessages.partition { it is ChatChildMessage }
 
         val childGroups = childMessages.groupBy { (it as ChatChildMessage).parentMessageID }
 
         simpleMessages.forEach { it ->
-            messagesToOutput.add(formalizeMassage(it))
-            val children = childGroups[it.chatMessageID]!!.map { formalizeMassage(it) }
-            messagesToOutput.addAll(children)
+            println(formalizeMassage(it))
+            (childGroups[it.chatMessageID]!!.map { formalizeMassage(it) }).forEach { println(it) }
         }
-
-        messagesToOutput.forEach { println(it) }
     }
 }
 
