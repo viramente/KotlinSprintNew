@@ -5,15 +5,15 @@ fun main() {
     val darkEye = PlayerLes16Task5("Dark Eye", 50, 13)
     val princeOfChelsea = PlayerLes16Task5("Prince of Chelsea", 100, 22)
 
-    darkEye.getLosses(princeOfChelsea)
-    darkEye.getLosses(princeOfChelsea)
-    princeOfChelsea.getLosses(darkEye)
+    darkEye.takeDamage(princeOfChelsea.getPunchStrength())
+    darkEye.takeDamage(princeOfChelsea.getPunchStrength())
+    princeOfChelsea.takeDamage(darkEye.getPunchStrength())
     darkEye.treat(10)
-    princeOfChelsea.getLosses(darkEye)
+    princeOfChelsea.takeDamage(darkEye.getPunchStrength())
     princeOfChelsea.treat(100)
-    darkEye.getLosses(princeOfChelsea)
+    darkEye.takeDamage(princeOfChelsea.getPunchStrength())
     darkEye.treat(100)
-    darkEye.getLosses(princeOfChelsea)
+    darkEye.takeDamage(princeOfChelsea.getPunchStrength())
 }
 
 class PlayerLes16Task5(val name: String, _health: Int, _punchStrength: Int) {
@@ -23,20 +23,22 @@ class PlayerLes16Task5(val name: String, _health: Int, _punchStrength: Int) {
 
     private var punchStrength = _punchStrength
 
+    fun getPunchStrength() = punchStrength
+
     private var isAlive = true
 
-    private fun andTheGame() = println("Игрок $name погиб. Навсегда.")
+    private fun finishGame() = println("Игрок $name погиб. Навсегда.")
 
-    fun getLosses(enemy: PlayerLes16Task5) {
+    fun takeDamage(damage: Int) {
         if (isAlive) {
-            if (health <= enemy.punchStrength) {
+            if (health <= damage) {
                 health = 0
                 punchStrength = 0
                 isAlive = false
-                andTheGame()
+                finishGame()
             } else {
-                health -= enemy.punchStrength
-                println("$name получил урон ${enemy.punchStrength}. Его здоровье: $health.")
+                health -= damage
+                println("$name получил урон ${damage}. Его здоровье: $health.")
             }
         } else println("Зря тратите силы. Мёртвый $name уже не опасен.")
     }
