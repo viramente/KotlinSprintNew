@@ -1,13 +1,6 @@
 package lesson15.task5
 
 
-// А еще можно сделать цикл do while, и чтобы грузовик тратил на дорогу больше времени, чем легковая машина
-// (можно через sleep реализовать), и чтобы программа сама рассчитывала, когда какой транспорт подъехал и уехал!
-// (И чтобы грузовик ездил только пока груз есть, а не гонял с одним пассажиром).
-// И тогда можно и пассажиров, и грузы поместить как свойства в класс "Очередь на перевозку".
-// (Но я не знаю, не лишнее ли это, такого вроде как нет в ТЗ).
-
-
 fun main() {
 
     val passengers = PassengersToLoad(9)
@@ -28,7 +21,9 @@ fun main() {
     cargo.getQuantityOfCargoInWaiting()
 
     auto.load(passengers)
+    auto.load(cargo)
     auto.unload(passengers)
+    auto.unload(cargo)
 
     passengers.getNumberOfPassengersInWaiting()
     cargo.getQuantityOfCargoInWaiting()
@@ -56,9 +51,7 @@ interface Transportable {
     fun unload(unitToLoad: UnitToLoad)
 }
 
-abstract class Transport() : Transportable
-
-class Truck() : Transport() {
+class Truck() : Transportable {
     private val maxPassengersAmount: Int = 1
     private val maxCargoAmountInTones: Int = 2
     private var passengersInIt: Int = 0
@@ -71,8 +64,10 @@ class Truck() : Transport() {
                     if (unitToLoad.passengersQuantity < maxPassengersAmount)
                         unitToLoad.passengersQuantity else maxPassengersAmount
                 unitToLoad.passengersQuantity -= passengersInIt
-                println("Пассажиры сели в грузовой автомобиль: $passengersInIt чел., " +
-                        "ждать остались ${unitToLoad.passengersQuantity} чел.")
+                println(
+                    "Пассажиры сели в грузовой автомобиль: $passengersInIt чел., " +
+                            "ждать остались ${unitToLoad.passengersQuantity} чел."
+                )
             }
 
             is CargoGroupToLoadInT -> {
@@ -80,8 +75,10 @@ class Truck() : Transport() {
                     if (unitToLoad.cargoQuantity < maxCargoAmountInTones)
                         unitToLoad.cargoQuantity else maxCargoAmountInTones
                 unitToLoad.cargoQuantity -= cargoInIt
-                println("Груз погружен в грузовой автомобиль: $cargoInIt т, " +
-                        "погрузки ждёт ${unitToLoad.cargoQuantity} т.")
+                println(
+                    "Груз погружен в грузовой автомобиль: $cargoInIt т, " +
+                            "погрузки ждёт ${unitToLoad.cargoQuantity} т."
+                )
             }
         }
     }
@@ -102,20 +99,25 @@ class Truck() : Transport() {
     }
 }
 
-class PassengerTransport() : Transport() {
+class PassengerTransport() : Transportable {
     private val maxPassengersAmount: Int = 3
     private var passengersInIt: Int = 0
 
     override fun load(unitToLoad: UnitToLoad) {
         when (unitToLoad) {
+
             is PassengersToLoad -> {
                 passengersInIt =
                     if (unitToLoad.passengersQuantity < maxPassengersAmount)
                         unitToLoad.passengersQuantity else maxPassengersAmount
                 unitToLoad.passengersQuantity -= passengersInIt
-                println("Пассажиры сели в легковой автомобиль: $passengersInIt чел., " +
-                        "ждать остались ${unitToLoad.passengersQuantity} чел.")
+                println(
+                    "Пассажиры сели в легковой автомобиль: $passengersInIt чел., " +
+                            "ждать остались ${unitToLoad.passengersQuantity} чел."
+                )
             }
+
+            is CargoGroupToLoadInT -> println("Груз не может перевозиться на легковом автомобиле.")
         }
     }
 
@@ -125,6 +127,8 @@ class PassengerTransport() : Transport() {
                 println("Пассажиры ($passengersInIt чел.) доставлены легковым автомобилем.")
                 passengersInIt = 0
             }
+
+            is CargoGroupToLoadInT -> println("Груза не было в легковом автомобиле.")
         }
     }
 }
