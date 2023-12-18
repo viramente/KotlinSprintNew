@@ -20,10 +20,10 @@ fun main() {
 
 }
 
-open class Tamagotchi(val name: String, private val action: String) {
+open class Tamagotchi(val name: String, private val feed: String) {
 
     fun eat() {
-        println("$name - $action")
+        println("$name - $feed")
     }
 
     fun play() {
@@ -35,6 +35,6 @@ open class Tamagotchi(val name: String, private val action: String) {
     }
 }
 
-class Fox(name: String, action: String = "ест ягоды") : Tamagotchi(name, action)
-class Dog(name: String, action: String = "ест кости") : Tamagotchi(name, action)
-class Cat(name: String, action: String = "ест рыбу") : Tamagotchi(name, action)
+class Fox(name: String, feed: String = "ест ягоды") : Tamagotchi(name, feed)
+class Dog(name: String, feed: String = "ест кости") : Tamagotchi(name, feed)
+class Cat(name: String, feed: String = "ест рыбу") : Tamagotchi(name, feed)
