@@ -2,24 +2,22 @@ package lesson17
 
 fun main() {
 
-    val packageLes17 = Package(1, "Варшава")
+    val packageLes17 = Package("Варшава")
     packageLes17.currentPlace = "Гданьск"
     packageLes17.currentPlace = "Ольштын"
 
     println(packageLes17.currentPlace)
-    println(packageLes17.movingCounter())
-
+    println(packageLes17.movingCounter)
 }
 
-class Package(val number: Int, _currentPlace: String) {
+class Package(currentPlace: String, movingCounter: Int = 1) {
 
-    private var _movingCounter: Int = 1
-    fun movingCounter() = _movingCounter
+    var movingCounter: Int = movingCounter
+        private set
 
-    var currentPlace = _currentPlace
-        get() = field
+    var currentPlace = currentPlace
         set(value) {
-            _movingCounter++
+            movingCounter++
             field = value
         }
 }
