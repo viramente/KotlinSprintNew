@@ -20,7 +20,7 @@ class PasswordLes17(_login: String, _password: String) {
         }
 
     var password = _password
-        get() = Array(field.length) { '*' }.joinToString("")
+        get() = "*".repeat(field.length)
         set(value) {
             println("Вы не можете изменить пароль.")
         }
