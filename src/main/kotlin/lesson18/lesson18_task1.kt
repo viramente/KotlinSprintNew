@@ -2,12 +2,12 @@ package lesson18
 
 fun main() {
 
-    val good = Crm()
+    val good = Order()
     good.getGoodInfo(1, "шапка")
     good.getGoodInfo(1, listOf("шапка", "шарф", "полотенце"))
 }
 
-class Crm() {
+class Order() {
 
     fun getGoodInfo(goodNumber: Int, goodName: String) {
         println("Заказан товар: $goodName")
