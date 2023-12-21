@@ -13,25 +13,22 @@ fun main() {
 
 }
 
-enum class OnlineStore() {
-    CLOTHING {
-        override fun getName(): String = "одежда"
-    },
-    STATIONERY {
-        override fun getName(): String = "канцелярские товары"
-    },
-    MISCELLANEOUS {
-        override fun getName(): String = "разное"
-    };
+enum class OnlineStore(private val categoryName: String) {
+    CLOTHING("одежда"),
+    STATIONERY("канцелярские товары"),
+    MISCELLANEOUS("разное");
 
-    abstract fun getName(): String
+    fun getName(): String = categoryName
 }
 
+
 class GoodL19T2(private val name: String, private val id: Int, private val category: OnlineStore) {
-    fun getGoodInfo() = println("""
+    fun getGoodInfo() = println(
+        """
         Информация о товаре:
           название: $name,
           id: $id,
           категория: ${category.getName()}.
-        """.trimIndent())
+        """.trimIndent()
+    )
 }
