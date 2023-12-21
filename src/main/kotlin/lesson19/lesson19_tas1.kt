@@ -7,19 +7,11 @@ fun main() {
 
 }
 
-enum class FishesL19T1() {
-    GUPPY {
-        override fun getFishes() = "гуппи"
-    },
-    ANGELFISH {
-        override fun getFishes() = "скалярия"
-    },
-    GOLDFISH {
-        override fun getFishes() = "золотая рыбка"
-    },
-    SIAMESE_FIGHTING_FISH {
-        override fun getFishes() = "петушок"
-    };
+enum class FishesL19T1(private val categoryName: String) {
+    GUPPY("гуппи"),
+    ANGELFISH("скалярия"),
+    GOLDFISH("золотая рыбка"),
+    SIAMESE_FIGHTING_FISH("петушок");
 
-    abstract fun getFishes(): String
+    fun getFishes(): String = categoryName
 }
