@@ -2,35 +2,21 @@ package lesson18
 
 fun main() {
 
-    val registry = BoxesRegistry()
+    val cube = Cube(13)
+    val rectangle = Rectangle(10, 12, 30)
 
-    val cube = registry.createBox(13)
-    val rectangle = registry.createBox(10, 12, 30)
-
-    println(cube.getPerimeterLes18Task4(cube))
-    println(rectangle.getPerimeterLes18Task4(rectangle))
+    println(cube.getPerimeterLes18Task4())
+    println(rectangle.getPerimeterLes18Task4())
 }
 
-class BoxesRegistry() {
-
-    fun createBox(side: Int): Cube = Cube(side)
-    fun createBox(length: Int, width: Int, height: Int): Rectangle = Rectangle(length, width, height)
-
+abstract class Box() {
+    abstract fun getPerimeterLes18Task4(): Int
 }
 
-open class Box() {
-
-    fun getPerimeterLes18Task4(box: Box): Int {
-
-        return when (box) {
-            is Cube -> box.side * box.side * box.side
-            is Rectangle -> box.length * box.width * box.height
-            else -> 0
-        }
-
-    }
+class Cube(private val side: Int) : Box() {
+    override fun getPerimeterLes18Task4(): Int = side * side * side
 }
 
-class Cube(val side: Int) : Box()
-
-class Rectangle(val length: Int, val width: Int, val height: Int) : Box()
+class Rectangle(private val length: Int, private val width: Int, private val height: Int) : Box() {
+    override fun getPerimeterLes18Task4(): Int = length * width * height
+}
