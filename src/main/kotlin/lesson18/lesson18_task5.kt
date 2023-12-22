@@ -14,59 +14,58 @@ fun main() {
 }
 
 class Screen() {
-
-    private fun drawRound(coordinatesX: Float, coordinatesY: Float): RoundL18T5 {
-        println("Нарисован круг c точной установкой с координатами: $coordinatesX, $coordinatesY.")
-        return RoundL18T5(coordinatesX, coordinatesY)
-    }
-
-    private fun drawRound(coordinatesX: Int, coordinatesY: Int): RoundL18T5 {
-        println("Нарисован круг c грубой установкой с координатами: $coordinatesX, $coordinatesY.")
-        return RoundL18T5(coordinatesX, coordinatesY)
-    }
-
-    private fun drawSquare(coordinatesX: Float, coordinatesY: Float): SquareL18T5 {
-        println("Нарисован квадрат c точной установкой с координатами: $coordinatesX, $coordinatesY.")
-        return SquareL18T5(coordinatesX, coordinatesY)
-    }
-
-    private fun drawSquare(coordinatesX: Int, coordinatesY: Int): SquareL18T5 {
-        println("Нарисован квадрат c грубой установкой с координатами: $coordinatesX, $coordinatesY.")
-        return SquareL18T5(coordinatesX, coordinatesY)
-    }
-
-    private fun drawPoint(coordinatesX: Float, coordinatesY: Float): PointL18T5 {
-        println("Нарисована точка c точной установкой с координатами: $coordinatesX, $coordinatesY.")
-        return PointL18T5(coordinatesX, coordinatesY)
-    }
-
-    private fun drawPoint(coordinatesX: Int, coordinatesY: Int): PointL18T5 {
-        println("Нарисована точка c грубой установкой с координатами: $coordinatesX, $coordinatesY.")
-        return PointL18T5(coordinatesX, coordinatesY)
-    }
-
-    fun draw(coordinatesX: Number, coordinatesY: Number, figureName: String) {
-
-        when (figureName) {
-
-            "круг" -> if (coordinatesX is Float && coordinatesY is Float) {
-                drawRound(coordinatesX, coordinatesY)
-            } else drawRound(coordinatesX as Int, coordinatesY as Int)
-
-            "квадрат" -> if (coordinatesX is Float && coordinatesY is Float) {
-                drawSquare(coordinatesX, coordinatesY)
-            } else drawSquare(coordinatesX as Int, coordinatesY as Int)
-
-            "точка" -> if (coordinatesX is Float && coordinatesY is Float) {
-                drawPoint(coordinatesX, coordinatesY)
-            } else drawPoint(coordinatesX as Int, coordinatesY as Int)
-
+    fun draw(coordinatesX: Number, coordinatesY: Number, figureType: String) {
+        if (coordinatesX is Int && coordinatesY is Int) {
+            when (figureType) {
+                "круг" -> RoundL18T5().draw(coordinatesX as Int, coordinatesY as Int)
+                "квадрат" -> SquareL18T5().draw(coordinatesX as Int, coordinatesY as Int)
+                "точка" -> PointL18T5().draw(coordinatesX as Int, coordinatesY as Int)
+            }
+        } else {
+            when (figureType) {
+                "круг" -> RoundL18T5().draw(coordinatesX as Float, coordinatesY as Float)
+                "квадрат" -> SquareL18T5().draw(coordinatesX as Float, coordinatesY as Float)
+                "точка" -> PointL18T5().draw(coordinatesX as Float, coordinatesY as Float)
+            }
         }
+
     }
 }
 
-class RoundL18T5(coordinatesX: Number, coordinatesY: Number)
+abstract class Figure() {
+    abstract fun draw(coordinatesX: Int, coordinatesY: Int)
+    abstract fun draw(coordinatesX: Float, coordinatesY: Float)
+}
 
-class SquareL18T5(coordinatesX: Number, coordinatesY: Number)
+class RoundL18T5() : Figure() {
 
-class PointL18T5(coordinatesX: Number, coordinatesY: Number)
+    override fun draw(coordinatesX: Int, coordinatesY: Int) {
+        println("Нарисован круг c грубой установкой с координатами: $coordinatesX, $coordinatesY.")
+    }
+
+    override fun draw(coordinatesX: Float, coordinatesY: Float) {
+        println("Нарисован круг c точной установкой с координатами: $coordinatesX, $coordinatesY.")
+    }
+}
+
+class SquareL18T5() : Figure() {
+
+    override fun draw(coordinatesX: Int, coordinatesY: Int) {
+        println("Нарисован квадрат c грубой установкой с координатами: $coordinatesX, $coordinatesY.")
+    }
+
+    override fun draw(coordinatesX: Float, coordinatesY: Float) {
+        println("Нарисован квадрат c точной установкой с координатами: $coordinatesX, $coordinatesY.")
+    }
+}
+
+class PointL18T5() : Figure() {
+
+    override fun draw(coordinatesX: Int, coordinatesY: Int) {
+        println("Нарисована точка c грубой установкой с координатами: $coordinatesX, $coordinatesY.")
+    }
+
+    override fun draw(coordinatesX: Float, coordinatesY: Float) {
+        println("Нарисована точка c точной установкой с координатами: $coordinatesX, $coordinatesY.")
+    }
+}
