@@ -1,7 +1,5 @@
 package lesson11.task1
 
-import lesson11.task2.User
-
 fun main() {
 
     val user1 = User(
@@ -29,3 +27,10 @@ fun main() {
     println(user2.email)
 
 }
+
+class User(
+    val id: Int,
+    val login: String,
+    val password: String,
+    val email: String,
+)
