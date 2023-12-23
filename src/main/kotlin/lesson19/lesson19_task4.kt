@@ -5,13 +5,13 @@ fun main() {
     tank.getCurrentShell()
     tank.shoot()
 
-    tank.loadShell("синий")
+    tank.loadShell(Shell.BLUE)
     tank.shoot()
 
-    tank.loadShell("красный")
+    tank.loadShell(Shell.RED)
     tank.shoot()
 
-    tank.loadShell("злёный")
+    tank.loadShell(Shell.GREEN)
     tank.shoot()
 }
 
@@ -28,16 +28,9 @@ class Tank() {
 
     fun getCurrentShell() = println("Заряжен снаряд: ${currentShell.typeName}.")
 
-    fun loadShell(shellType: String) {
-
-        val correspondingShell = Shell.entries.find { it.typeName == shellType }
-
-        if (correspondingShell != null) {
-            println("Установлен ${correspondingShell.typeName} снаряд.")
-            currentShell = correspondingShell
-        } else {
-            println("Запрошен снаряд, которого нет на вооружении. Заряжен текущий снаряд.")
-        }
+    fun loadShell(shellType: Shell) {
+            println("Установлен ${shellType.typeName} снаряд.")
+            currentShell = shellType
     }
 
     fun shoot() = println("Нанесён урон: ${currentShell.punchStrength}.")
