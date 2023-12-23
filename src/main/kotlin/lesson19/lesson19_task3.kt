@@ -1,12 +1,19 @@
 package lesson19
 
-abstract class SpaceshipL19T3() {
+fun main() {
+
+    val spaceShip = SpaceshipL19T3()
+    spaceShip.land()
+
+}
+
+class SpaceshipL19T3() {
 
     fun takeOff() = println("")
     //TODO: тут надо дописать логику
 
     fun land(): Nothing = TODO()
 
-    abstract fun shootBackAtAnAsteroid()
+    fun shootBackAtAnAsteroid(): Nothing = TODO()
 
 }
