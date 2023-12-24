@@ -1,27 +1,27 @@
 package lesson20
 
 fun main() {
-
-    val sentencesToSay = listOf(
-        "Вот тебе и поломанный мухожук.",
-        "Там точно есть мать-барсучиха?",
-        "Я как сюрреалистический сон, но нужны крепкие нервы.",
-        "Хочу стать гриффоном, ведущим себя, как кот.",
-        "Плыви, любуйся рыбками, ищи акулу.",
-    )
-
-    val andrzej = Robot(sentencesToSay)
+    val andrzej = Robot()
     andrzej.say()
     andrzej.setModifier { sentence: String -> sentence.uppercase() }
     andrzej.say()
 }
 
-class Robot(sentencesToSay: List<String>) {
-    private var currentSentence = sentencesToSay.random()
+class Robot() {
 
-    fun say() = println(currentSentence)
+    private fun sentencesToSay() = listOf(
+        "Вот тебе и поломанный мухожук.",
+        "Там точно есть мать-барсучиха?",
+        "Я как сюрреалистический сон, но нужны крепкие нервы.",
+        "Хочу стать гриффоном, ведущим себя, как кот.",
+        "Плыви, любуйся рыбками, ищи акулу.",
+    ).random()
+
+    private var modifier: (String) -> String = { string: String -> string }
 
     fun setModifier(lambda: (String) -> String) {
-        currentSentence = lambda(currentSentence)
+        modifier = lambda
     }
+
+    fun say() = println(modifier(sentencesToSay()))
 }
