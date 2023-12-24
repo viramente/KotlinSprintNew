@@ -2,9 +2,13 @@ package lesson20
 
 fun main() {
 
-    val agneshka = PlayerL20T2("Агнешка", 87, 100);
+    val agneshka = PlayerL20T2("Агнешка", 87, 100)
 
-    { player: PlayerL20T2 -> player.currentHealth = player.maxHealth } (agneshka)
+    val lambda: (PlayerL20T2) -> Unit
+
+    lambda = { player: PlayerL20T2 -> player.currentHealth = player.maxHealth }
+
+    lambda(agneshka)
 
     println(agneshka.currentHealth)
 }
