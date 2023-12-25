@@ -4,9 +4,7 @@ fun main() {
 
     val book = Book(543, "Земля", "Кроманьонец")
 
-    val bookId = book.id
-    val bookAuthor = book.author
-    val bookName = book.name
+    val (bookId, bookAuthor, bookName) = book
 
     println(bookId)
     println(bookAuthor)
