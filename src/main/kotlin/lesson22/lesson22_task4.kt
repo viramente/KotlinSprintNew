@@ -2,35 +2,25 @@ package lesson22
 
 fun main() {
 
-    val mainScreenViewModel = MainScreenViewModel("Данные с сервера")
+    val mainScreenViewModel = MainScreenViewModel()
 
-    mainScreenViewModel.loadData(LoadingStatus.NO_DATA)
-    println(mainScreenViewModel.mainScreenState.state)
-
-    mainScreenViewModel.loadData(LoadingStatus.IS_LOADING)
-    println(mainScreenViewModel.mainScreenState.state)
+    mainScreenViewModel.loadData("Данные с сервера")
 
 }
 
-data class ScreenState(val data: String, var isLoading: Boolean = false)
+class MainScreenViewModel() {
 
-enum class LoadingStatus(val statusInText: String) {
-    NO_DATA("отсутствие данных"),
-    IS_LOADING("загрузка данных"),
-    HAS_LOADED_DATA("наличие загруженных данных"),
-}
+    data class ScreenState(var data: String, var isLoading: Boolean = false)
 
-class MainScreenViewModel(dataFromServer: String) {
+    private var mainScreenState = ScreenState("", false)
 
-    data class MainScreenState(var state: ScreenState)
+    fun loadData(loadingData: String) {
 
-    var mainScreenState = MainScreenState(ScreenState(dataFromServer, false))
+        mainScreenState = mainScreenState.copy(isLoading = true)
+        println("данные загружаются...")
 
-    fun loadData(status: LoadingStatus) {
-        when (status) {
-            LoadingStatus.NO_DATA -> mainScreenState.state = mainScreenState.state.copy(isLoading = false)
-            LoadingStatus.IS_LOADING -> mainScreenState.state = mainScreenState.state.copy(isLoading = true)
-            LoadingStatus.HAS_LOADED_DATA -> mainScreenState.state = mainScreenState.state.copy(isLoading = false)
-        }
+        mainScreenState = mainScreenState.copy(data = loadingData, isLoading = false)
+        println("данные загружены")
+
     }
 }
